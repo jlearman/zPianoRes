@@ -5,32 +5,7 @@
 @prefix mod:   <http://moddevices.com/ns/mod#> .
 @prefix zcpset: <http://gareus.org/oss/lv2/@LV2NAME@/pset#> .
 
-<http://gareus.org/oss/lv2/@LV2NAME@#Mono>
-	a lv2:Plugin;
-	lv2:binary <@LV2NAME@@LIB_EXT@>;
-	rdfs:seeAlso <@LV2NAME@.ttl>.
-
-<http://gareus.org/oss/lv2/@LV2NAME@#CfgMono>
-	a lv2:Plugin;
-	lv2:binary <@LV2NAME@@LIB_EXT@>;
-	rdfs:seeAlso <@LV2NAME@.ttl>.
-
-<http://gareus.org/oss/lv2/@LV2NAME@#Stereo>
-	a lv2:Plugin;
-	lv2:binary <@LV2NAME@@LIB_EXT@>;
-	rdfs:seeAlso <@LV2NAME@.ttl>.
-
 <http://gareus.org/oss/lv2/@LV2NAME@#CfgStereo>
-	a lv2:Plugin;
-	lv2:binary <@LV2NAME@@LIB_EXT@>;
-	rdfs:seeAlso <@LV2NAME@.ttl>.
-
-<http://gareus.org/oss/lv2/@LV2NAME@#MonoToStereo>
-	a lv2:Plugin;
-	lv2:binary <@LV2NAME@@LIB_EXT@>;
-	rdfs:seeAlso <@LV2NAME@.ttl>.
-
-<http://gareus.org/oss/lv2/@LV2NAME@#CfgMonoToStereo>
 	a lv2:Plugin;
 	lv2:binary <@LV2NAME@@LIB_EXT@>;
 	rdfs:seeAlso <@LV2NAME@.ttl>.
@@ -75,17 +50,3 @@
 <http://harrisonconsoles.com/lv2/routing#connectAllOutputs>
 	a lv2:Feature .
 
-zcpset:noopMono
-	a pset:Preset;
-	lv2:appliesTo <http://gareus.org/oss/lv2/zeroconvolv#Mono>;
-	rdfs:seeAlso <presets.ttl> .
-
-zcpset:noopMonoToStereo
-	a pset:Preset;
-	lv2:appliesTo <http://gareus.org/oss/lv2/zeroconvolv#MonoToStereo>;
-	rdfs:seeAlso <presets.ttl> .
-
-zcpset:noopStereo
-	a pset:Preset;
-	lv2:appliesTo <http://gareus.org/oss/lv2/zeroconvolv#Stereo>;
-	rdfs:seeAlso <presets.ttl> .
