@@ -149,13 +149,31 @@ $(BUILDDIR)$(LV2NAME)$(LIB_EXT): $(DSP_DEPS) Makefile
 
 # install/uninstall/clean target definitions
 
-install: all
+ZYNDIR=/zynthian/zynthian-plugins/lv2
+zinstall: all
+	install -d $(ZYNDIR)/$(BUNDLE)
+	install -m755 $(BUILDDIR)$(LV2NAME)$(LIB_EXT) $(ZYNDIR)/$(BUNDLE)
+	install -m644 $(BUILDDIR)manifest.ttl $(BUILDDIR)presets.ttl $(BUILDDIR)$(LV2NAME).ttl $(ZYNDIR)/$(BUNDLE)
+	install -m644 $(BUILDDIR)/ir/* $(ZYNDIR)/$(BUNDLE)/ir
+
+zuninstall:
+	rm -rf $(ZYNDIR)/$(BUNDLE)
+
+zreset:
+	bash /zynthian/zynthian-sys/scripts/recipes/install_x42_zeroconvo_prebuilt.sh
+
+zrm:
+	rm -rf /zynthian/zynthian-plugins/lv2/zeroconvo.lv2
+	rm -rf /zynthian/zynthian-data/lv2-custom/zeroconvo.lv2
+	rm -rf /usr/local/lib/lv2/zeroconvo.lv2
+
+xinstall: all
 	install -d $(DESTDIR)$(LV2DIR)/$(BUNDLE)/ir
 	install -m755 $(BUILDDIR)$(LV2NAME)$(LIB_EXT) $(DESTDIR)$(LV2DIR)/$(BUNDLE)
 	install -m644 $(BUILDDIR)manifest.ttl $(BUILDDIR)presets.ttl $(BUILDDIR)$(LV2NAME).ttl $(DESTDIR)$(LV2DIR)/$(BUNDLE)
-	install -m644 $(BUILDDIR)/ir/* $(DESTDIR)$(LV2DIR)/$(BUNDLE)/ir
+	install -m644 $(BUILDDIR)/ir/* $(DESTDIR)$(LV2DIR)/$(BUNDLE)/ir/
 
-uninstall:
+xuninstall:
 	rm -f $(DESTDIR)$(LV2DIR)/$(BUNDLE)/manifest.ttl
 	rm -f $(DESTDIR)$(LV2DIR)/$(BUNDLE)/presets.ttl
 	rm -f $(DESTDIR)$(LV2DIR)/$(BUNDLE)/$(LV2NAME).ttl

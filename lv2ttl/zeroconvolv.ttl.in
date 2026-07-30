@@ -194,6 +194,7 @@ conv:CfgMono
 		lv2:maximum 1 ;
 		lv2:portProperty lv2:integer, lv2:toggled;
 		lv2:portProperty pp:causesArtifacts, pp:notAutomatic;
+		lv2:displayPriority 100 ;
 	] , [
 		a lv2:InputPort , lv2:ControlPort ;
 		lv2:index 3 ;
@@ -204,6 +205,7 @@ conv:CfgMono
 		lv2:maximum   6.0;
 		units:unit units:db ;
 		lv2:scalePoint [ rdfs:label "off";  rdf:value -60.0 ] ;
+		lv2:displayPriority 300 ;
 	] , [
 		a lv2:InputPort , lv2:ControlPort ;
 		lv2:index 4 ;
@@ -214,6 +216,7 @@ conv:CfgMono
 		lv2:maximum   6.0;
 		units:unit units:db ;
 		lv2:scalePoint [ rdfs:label "off";  rdf:value -60.0 ] ;
+		lv2:displayPriority 200 ;
 	] , [
 		a lv2:InputPort , lv2:ControlPort ;
 		lv2:index 5 ;
@@ -224,6 +227,7 @@ conv:CfgMono
 		lv2:maximum 1 ;
 		lv2:portProperty lv2:integer, lv2:toggled;
 		lv2:designation lv2:enabled;
+		lv2:displayPriority 500 ;
 	] , [
 		a lv2:ControlPort, lv2:OutputPort;
 		lv2:index 6;
@@ -285,6 +289,7 @@ conv:CfgStereo
 		lv2:maximum 1 ;
 		lv2:portProperty lv2:integer, lv2:toggled;
 		lv2:portProperty pp:causesArtifacts, pp:notAutomatic;
+		lv2:displayPriority 100 ;
 	] , [
 		a lv2:InputPort , lv2:ControlPort ;
 		lv2:index 3 ;
@@ -295,6 +300,7 @@ conv:CfgStereo
 		lv2:maximum   6.0;
 		units:unit units:db ;
 		lv2:scalePoint [ rdfs:label "off";  rdf:value -60.0 ] ;
+		lv2:displayPriority 300 ;
 	] , [
 		a lv2:InputPort , lv2:ControlPort ;
 		lv2:index 4 ;
@@ -305,6 +311,7 @@ conv:CfgStereo
 		lv2:maximum   6.0;
 		units:unit units:db ;
 		lv2:scalePoint [ rdfs:label "off";  rdf:value -60.0 ] ;
+		lv2:displayPriority 200 ;
 	] , [
 		a lv2:InputPort , lv2:ControlPort ;
 		lv2:index 5 ;
@@ -315,6 +322,7 @@ conv:CfgStereo
 		lv2:maximum 1 ;
 		lv2:portProperty lv2:integer, lv2:toggled;
 		lv2:designation lv2:enabled;
+		lv2:displayPriority 500 ;
 	] , [
 		a lv2:ControlPort, lv2:OutputPort;
 		lv2:index 6;
@@ -390,6 +398,7 @@ conv:CfgMonoToStereo
 		lv2:maximum 1 ;
 		lv2:portProperty lv2:integer, lv2:toggled;
 		lv2:portProperty pp:causesArtifacts, pp:notAutomatic;
+		lv2:displayPriority 100 ;
 	] , [
 		a lv2:InputPort , lv2:ControlPort ;
 		lv2:index 3 ;
@@ -400,6 +409,7 @@ conv:CfgMonoToStereo
 		lv2:maximum   6.0;
 		units:unit units:db ;
 		lv2:scalePoint [ rdfs:label "off";  rdf:value -60.0 ] ;
+		lv2:displayPriority 300 ;
 	] , [
 		a lv2:InputPort , lv2:ControlPort ;
 		lv2:index 4 ;
@@ -410,6 +420,7 @@ conv:CfgMonoToStereo
 		lv2:maximum   6.0;
 		units:unit units:db ;
 		lv2:scalePoint [ rdfs:label "off";  rdf:value -60.0 ] ;
+		lv2:displayPriority 200 ;
 	] , [
 		a lv2:InputPort , lv2:ControlPort ;
 		lv2:index 5 ;
@@ -420,6 +431,7 @@ conv:CfgMonoToStereo
 		lv2:maximum 1 ;
 		lv2:portProperty lv2:integer, lv2:toggled;
 		lv2:designation lv2:enabled;
+		lv2:displayPriority 500 ;
 	] , [
 		a lv2:ControlPort, lv2:OutputPort;
 		lv2:index 6;

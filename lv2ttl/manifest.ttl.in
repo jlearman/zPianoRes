@@ -2,6 +2,7 @@
 @prefix lv2:  <http://lv2plug.in/ns/lv2core#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix pset: <http://lv2plug.in/ns/ext/presets#> .
+@prefix mod:   <http://moddevices.com/ns/mod#> .
 @prefix zcpset: <http://gareus.org/oss/lv2/@LV2NAME@/pset#> .
 
 <http://gareus.org/oss/lv2/@LV2NAME@#Mono>
@@ -36,7 +37,9 @@
 
 <http://gareus.org/oss/lv2/@LV2NAME@#ir>
 	a lv2:Parameter;
+	mod:fileTypes "wav,flac";
 	rdfs:label "Impulse Response";
+	lv2:displayPriority 400 ;
 	rdfs:range atom:Path.
 
 <http://gareus.org/oss/lv2/@LV2NAME@#gain>
@@ -46,7 +49,7 @@
 
 <http://gareus.org/oss/lv2/@LV2NAME@#sum_inputs>
 	a lv2:Parameter;
-	rdfs:label "Downmix stereo input (only useful with true-stereo varian)";
+	rdfs:label "Downmix stereo input (only useful with true-stereo variant)";
 	rdfs:range atom:Bool.
 
 <http://gareus.org/oss/lv2/@LV2NAME@#predelay>
@@ -71,3 +74,18 @@
 
 <http://harrisonconsoles.com/lv2/routing#connectAllOutputs>
 	a lv2:Feature .
+
+zcpset:noopMono
+	a pset:Preset;
+	lv2:appliesTo <http://gareus.org/oss/lv2/zeroconvolv#Mono>;
+	rdfs:seeAlso <presets.ttl> .
+
+zcpset:noopMonoToStereo
+	a pset:Preset;
+	lv2:appliesTo <http://gareus.org/oss/lv2/zeroconvolv#MonoToStereo>;
+	rdfs:seeAlso <presets.ttl> .
+
+zcpset:noopStereo
+	a pset:Preset;
+	lv2:appliesTo <http://gareus.org/oss/lv2/zeroconvolv#Stereo>;
+	rdfs:seeAlso <presets.ttl> .
