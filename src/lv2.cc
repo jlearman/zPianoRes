@@ -95,6 +95,7 @@ enum {
 struct zeroConvolv {
 	zeroConvolv ()
 	{
+		midi_in     = NULL;
 		input[0]    = input[1] = NULL;
 		output[0]   = output[1] = NULL;
 		p_latency   = NULL;
@@ -131,6 +132,7 @@ struct zeroConvolv {
 	LV2_Atom_Forge_Frame     frame;
 	const LV2_Atom_Sequence* control;
 	LV2_Atom_Sequence*       notify;
+	LV2_Atom_Sequence*       midi_in;
 
 	LV2_URID atom_Blank;
 	LV2_URID atom_Object;
@@ -401,18 +403,21 @@ connect_port (LV2_Handle instance,
 
 	switch (port) {
 		case 0:
-			self->p_latency = (float*)data;
+			self->midi_in = (LV2_Atom_Sequence*)data;
 			break;
 		case 1:
-			self->output[0] = (float*)data;
-			break;
-		case 3:
-			self->output[1] = (float*)data;
+			self->p_latency = (float*)data;
 			break;
 		case 2:
-			self->input[0] = (const float*)data;
+			self->output[0] = (float*)data;
 			break;
 		case 4:
+			self->output[1] = (float*)data;
+			break;
+		case 3:
+			self->input[0] = (const float*)data;
+			break;
+		case 5:
 			self->input[1] = (const float*)data;
 			break;
 		default:
@@ -450,6 +455,15 @@ run (LV2_Handle instance, uint32_t n_samples)
 		}
 		return;
 	}
+
+#if 0
+	LV2_ATOM_SEQUENCE_FOREACH(self->midi_in, ev) {
+    	if (ev->body.type == uris.midi_Event) {
+        	const uint8_t* msg = (const uint8_t*)(ev + 1);
+        	// Handle MIDI message (msg[0] status, msg[1] data1, msg[2] data2)
+    	}
+	}
+#endif
 
 	const bool buffered = self->buffered;
 
