@@ -11,6 +11,7 @@
 @prefix pp:    <http://lv2plug.in/ns/ext/port-props#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rsz:   <http://lv2plug.in/ns/ext/resize-port#> .
 @prefix state: <http://lv2plug.in/ns/ext/state#>.
 @prefix time:  <http://lv2plug.in/ns/ext/time#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#>.
@@ -117,8 +118,10 @@ conv:CfgStereo
 		units:unit units:frame;
 	] , [
 		a lv2:InputPort , atom:AtomPort ;
+		rsz:minimumSize 8912 ;
 		atom:bufferType atom:Sequence ;
-		atom:supports midi:MidiEvent ,
+		atom:supports
+			midi:MidiEvent ,
 			patch:Message ,
 			time:Position ;
 		lv2:designation lv2:control ;

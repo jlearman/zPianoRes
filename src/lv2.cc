@@ -35,6 +35,7 @@
 #include <lv2/core/lv2.h>
 #include <lv2/log/log.h>
 #include <lv2/log/logger.h>
+#include <lv2/midi/midi.h>
 #include <lv2/options/options.h>
 #include <lv2/patch/patch.h>
 #include <lv2/state/state.h>
@@ -46,6 +47,7 @@
 #include <lv2/lv2plug.in/ns/ext/buf-size/buf-size.h>
 #include <lv2/lv2plug.in/ns/ext/log/log.h>
 #include <lv2/lv2plug.in/ns/ext/log/logger.h>
+#include <lv2/lv2plug.in/ns/ext/midi/midi.h>
 #include <lv2/lv2plug.in/ns/ext/options/options.h>
 #include <lv2/lv2plug.in/ns/ext/patch/patch.h>
 #include <lv2/lv2plug.in/ns/ext/state/state.h>
@@ -404,6 +406,7 @@ connect_port (LV2_Handle instance,
 	switch (port) {
 		case 0:
 			self->midi_in = (LV2_Atom_Sequence*)data;
+			fprintf(stderr, "=================================== connect MIDI in\n");
 			break;
 		case 1:
 			self->p_latency = (float*)data;
@@ -421,6 +424,7 @@ connect_port (LV2_Handle instance,
 			self->input[1] = (const float*)data;
 			break;
 		default:
+			fprintf(stderr, "=================================== CONNECT default\n");
 			break;
 	}
 }
@@ -428,6 +432,7 @@ connect_port (LV2_Handle instance,
 static void
 activate (LV2_Handle instance)
 {
+	fprintf(stderr, "ACTIVATE\n");
 	zeroConvolv* self = (zeroConvolv*)instance;
 	if (self->clv_online) {
 		self->clv_online->reset ();
@@ -448,6 +453,8 @@ run (LV2_Handle instance, uint32_t n_samples)
 {
 	zeroConvolv* self = (zeroConvolv*)instance;
 
+	static bool sustain_pedal_down = false;
+
 	if (!self->clv_online) {
 		*self->p_latency = 0;
 		for (int i = 0; i < self->chn_out; i++) {
@@ -456,14 +463,28 @@ run (LV2_Handle instance, uint32_t n_samples)
 		return;
 	}
 
-#if 0
 	LV2_ATOM_SEQUENCE_FOREACH(self->midi_in, ev) {
-    	if (ev->body.type == uris.midi_Event) {
-        	const uint8_t* msg = (const uint8_t*)(ev + 1);
-        	// Handle MIDI message (msg[0] status, msg[1] data1, msg[2] data2)
-    	}
+		fprintf(stderr, "============================================= MIDI EVENT\n");
+		// handle MIDI event
+		const uint8_t* msg = (const uint8_t*)LV2_ATOM_BODY_CONST(&ev->body);
+		// Check for Control Change message (status byte 0xB0 - 0xBF)
+		if ((msg[0] & 0xF0) == 0xb0) {
+			uint8_t controller = msg[1];
+			uint8_t value      = msg[2];
+			// check for sustain pedal (CC 64)
+			if (controller == 64) {
+				if (value >= 64) {
+					self->clv_online->set_output_gain (db_to_coeff (self->db_dry), db_to_coeff (self->db_wet), true);
+					sustain_pedal_down = true;
+					fprintf(stderr, "============================================= MIDI EVENT - SUS PEDAL DOWN\n");
+				} else {
+					self->clv_online->set_output_gain (db_to_coeff (self->db_dry), 0.0, true);
+					sustain_pedal_down = false;
+					fprintf(stderr, "============================================= MIDI EVENT - SUS PEDAL UP\n");
+				}
+			}
+		}
 	}
-#endif
 
 	const bool buffered = self->buffered;
 
