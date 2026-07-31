@@ -119,7 +119,7 @@ $(BUILDDIR)manifest.ttl: lv2ttl/manifest.ttl.in Makefile presets/*.ttl
 		head -n 3 $$file \
 			| sed "s/@LV2NAME@/$(LV2NAME)/g" \
 			>> $(BUILDDIR)manifest.ttl; \
-		echo "rdfs:seeAlso <presets.ttl> ." \
+		echo "	rdfs:seeAlso <presets.ttl> ." \
 			>> $(BUILDDIR)manifest.ttl;\
 		done
 
