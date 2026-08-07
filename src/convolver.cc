@@ -157,7 +157,8 @@ Convolver::Convolver (std::string const& path,
 	, _wet (1.f)
 	, _dry_target (0.f)
 	, _wet_target (1.f)
-	, _a (2950.f / sample_rate) // ~20Hz for 90%
+	// , _a (2950.f / sample_rate) // ~20Hz for 90%
+	, _a (1000.f / sample_rate) // ~20Hz for 90% // TODO: make a parameter
 {
 	if (_path.substr (0, 4) == "mem:") {
 		_fs = new MemSource ();
