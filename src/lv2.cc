@@ -448,12 +448,12 @@ copy_no_inplace_buffers (float* out, float const* in, uint32_t n_samples)
 	memcpy (out, in, sizeof (float) * n_samples);
 }
 
+static float sustain_level = 0.0;
+
 static void
 run (LV2_Handle instance, uint32_t n_samples)
 {
 	zeroConvolv* self = (zeroConvolv*)instance;
-
-	static bool sustain_pedal_down = false;
 
 	if (!self->clv_online) {
 		*self->p_latency = 0;
@@ -464,24 +464,22 @@ run (LV2_Handle instance, uint32_t n_samples)
 	}
 
 	LV2_ATOM_SEQUENCE_FOREACH(self->midi_in, ev) {
-		fprintf(stderr, "============================================= MIDI EVENT\n");
 		// handle MIDI event
+		// TODO: use map to check event URL, see patch_Get
 		const uint8_t* msg = (const uint8_t*)LV2_ATOM_BODY_CONST(&ev->body);
-		// Check for Control Change message (status byte 0xB0 - 0xBF)
+		// Check for Control Change message (status byte 0xB0 - 0xBF). Ignore MIDI channel.
 		if ((msg[0] & 0xF0) == 0xb0) {
 			uint8_t controller = msg[1];
 			uint8_t value      = msg[2];
 			// check for sustain pedal (CC 64)
 			if (controller == 64) {
 				if (value >= 64) {
-					self->clv_online->set_output_gain (db_to_coeff (self->db_dry), db_to_coeff (self->db_wet), true);
-					sustain_pedal_down = true;
-					fprintf(stderr, "============================================= MIDI EVENT - SUS PEDAL DOWN\n");
+					sustain_level = 1.0;
+					// TODO: switch to alternate convolver to start with an empty one.
 				} else {
-					self->clv_online->set_output_gain (db_to_coeff (self->db_dry), 0.0, true);
-					sustain_pedal_down = false;
-					fprintf(stderr, "============================================= MIDI EVENT - SUS PEDAL UP\n");
+					sustain_level = 0.0;
 				}
+				self->clv_online->set_output_gain (db_to_coeff (self->db_dry), sustain_level * db_to_coeff (self->db_wet), true);
 			}
 		}
 	}
@@ -593,8 +591,8 @@ work_response (LV2_Handle  instance,
 	self->clv_online  = self->clv_offline;
 	self->clv_offline = old;
 
-	/* set gain coefficients for new instance */
-	self->clv_online->set_output_gain (db_to_coeff (self->db_dry), db_to_coeff (self->db_wet), false);
+	/* set gain coefficients for new instance, assuming sus pedal not down */
+	self->clv_online->set_output_gain (db_to_coeff (self->db_dry), sustain_level * db_to_coeff (self->db_wet), true);
 
 	assert (self->clv_online != self->clv_offline || self->clv_online == NULL);
 
@@ -1159,13 +1157,13 @@ run_cfg (LV2_Handle instance, uint32_t n_samples)
 		self->dry_target = db_to_coeff (db_dry);
 
 		if (self->clv_online) {
-			self->clv_online->set_output_gain (self->dry_target, db_to_coeff (db_wet));
+			self->clv_online->set_output_gain (self->dry_target, sustain_level * db_to_coeff (db_wet), true);
 			self->dry_coeff = self->dry_target; // assume convolver completes interpolation
 		}
 	}
 
 	if (self->clv_online) {
-		run (instance, n_samples);
+		run(instance, n_samples);
 		return;
 	}
 
