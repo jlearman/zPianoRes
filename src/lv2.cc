@@ -17,6 +17,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+// TODO: set range for wet level reasonable, where current -54 dB is 0dB
+
 #include <cassert>
 #include <cmath>
 #include <cstdlib>
@@ -356,7 +358,7 @@ instantiate (const LV2_Descriptor*     descriptor,
 	self->rate        = rate;
 	self->buffered    = true;
 	self->db_wet      = 0.f;
-	self->db_dry      = -60.f;
+	self->db_dry      = -60.f; // FIXME
 	self->dry_coeff   = 0.f;
 	self->dry_target  = 0.f;
 	self->tc64        = 2950.f / rate; // ~20Hz for 90%
@@ -1020,7 +1022,7 @@ extension_data (const char* uri)
 static float
 db_to_coeff (float db)
 {
-	if (db <= -60.f) {
+	if (db <= -60.f) { // FIXME
 		return 0;
 	}
 	if (db > 6.02f) {
@@ -1148,7 +1150,7 @@ run_cfg (LV2_Handle instance, uint32_t n_samples)
 
 	if (!enabled) {
 		db_dry = 0;
-		db_wet = -60;
+		db_wet = -60; // FIXME
 	}
 
 	if (self->db_dry != db_dry || self->db_wet != db_wet) {
