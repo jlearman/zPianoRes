@@ -131,8 +131,7 @@ $(BUILDDIR)presets.ttl: lv2ttl/presets.ttl.in presets/*.ttl presets/ir
 		lv2ttl/presets.ttl.in > $(BUILDDIR)presets.ttl
 	cat presets/*.ttl | sed "s/@LV2NAME@/$(LV2NAME)/g" >> $(BUILDDIR)presets.ttl
 	@mkdir -p $(BUILDDIR)/ir
-	cp presets/ir/*.wav $(BUILDDIR)/ir/
-	cp presets/ir/*.flac $(BUILDDIR)/ir/
+	cp presets/ir/* $(BUILDDIR)/ir/
 
 $(BUILDDIR)$(LV2NAME).ttl: lv2ttl/$(LV2NAME).ttl.in
 	@mkdir -p $(BUILDDIR)
