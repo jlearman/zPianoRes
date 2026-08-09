@@ -56,7 +56,7 @@ cat > manifest.ttl << EOF
 @prefix lv2:  <http://lv2plug.in/ns/lv2core#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix pset: <http://lv2plug.in/ns/ext/presets#> .
-@prefix zcpset: <http://gareus.org/oss/lv2/zeroconvolv/pset#> .
+@prefix zcpset: <http://jlearman.org/oss/lv2/zPianoRes/pset#> .
 
 EOF
 
@@ -68,7 +68,7 @@ cat > presets.ttl << EOF
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix zcpset: <http://gareus.org/oss/lv2/zeroconvolv/pset#> .
+@prefix zcpset: <http://jlearman.org/oss/lv2/zPianoRes/pset#> .
 
 EOF
 
@@ -124,7 +124,7 @@ for ir in *.flac; do
 
 zcpset:${UPFX}${URISUFFIX}
  a pset:Preset;
- lv2:appliesTo <http://gareus.org/oss/lv2/zeroconvolv#${SFX}>;
+ lv2:appliesTo <http://jlearman.org/oss/lv2/zPianoRes#${SFX}>;
 EOF
 
 	echo " rdfs:seeAlso <presets.ttl>." >> manifest.ttl
@@ -134,17 +134,17 @@ EOF
  rdfs:label "${NPFX}${BN}";
  rdfs:comment "${COMMENT}";
  state:state [
-  <http://gareus.org/oss/lv2/zeroconvolv#ir> <${FILEURL}>;
-  <http://gareus.org/oss/lv2/zeroconvolv#predelay> "0"^^xsd:int ;
+  <http://jlearman.org/oss/lv2/zPianoRes#ir> <${FILEURL}>;
+  <http://jlearman.org/oss/lv2/zPianoRes#predelay> "0"^^xsd:int ;
 EOF
 
   $FFTGAIN "${ir}" >> presets.ttl
 
 	if $FULLSTATE; then
 	cat >> presets.ttl << EOF
-  <http://gareus.org/oss/lv2/zeroconvolv#gain> "1.0"^^xsd:float ;
-  <http://gareus.org/oss/lv2/zeroconvolv#sum_inputs> false;
-  <http://gareus.org/oss/lv2/zeroconvolv#channel_predelay> [
+  <http://jlearman.org/oss/lv2/zPianoRes#gain> "1.0"^^xsd:float ;
+  <http://jlearman.org/oss/lv2/zPianoRes#sum_inputs> false;
+  <http://jlearman.org/oss/lv2/zPianoRes#channel_predelay> [
     a atom:Vector ; atom:childType atom:Int ;
     rdf:value (
       "0"^^xsd:int
@@ -153,7 +153,7 @@ EOF
       "0"^^xsd:int
     )
   ] ;
-  <http://gareus.org/oss/lv2/zeroconvolv#channel_gain> [
+  <http://jlearman.org/oss/lv2/zPianoRes#channel_gain> [
     a atom:Vector ; atom:childType atom:Float ;
     rdf:value (
       "1.0"^^xsd:float
