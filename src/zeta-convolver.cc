@@ -2,6 +2,7 @@
 //
 //  Copyright (C) 2006-2018 Fons Adriaensen <fons@linuxaudio.org>
 //  Copyright (C) 2020-2021 Robin Gareus <robin@gareus.org>
+//  Copyright (C) 2026      Jeff Learman <jjlearman@gmail.com>
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by

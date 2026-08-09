@@ -18,26 +18,26 @@
 @prefix urid:  <http://lv2plug.in/ns/ext/urid#>.
 @prefix work:  <http://lv2plug.in/ns/ext/worker#>.
 
-@prefix conv:  <http://gareus.org/oss/lv2/@LV2NAME@#>.
+@prefix conv:  <http://jlearman.org/oss/lv2/@LV2NAME@#>.
 
 # https://github.com/drobilla/lilv/issues/14
 state:freePath a lv2:Feature .
 
-<http://gareus.org/rgareus#me>
+<http://jlearman.org/rgareus#me>
 	a foaf:Person;
 	foaf:name "Robin Gareus";
 	foaf:mbox <mailto:robin@gareus.org>;
 	foaf:homepage <http://gareus.org/>.
 
-<http://gareus.org/oss/lv2/zeroconvolv>
+<http://jlearman.org/oss/lv2/zeroconvolv>
 	a doap:Project;
-	doap:maintainer <http://gareus.org/rgareus#me>;
+	doap:maintainer <http://jlearman.org/rgareus#me>;
 	doap:name "x42 - LV2 Convolution".
 
 conv:CfgStereo
 	a lv2:Plugin, lv2:ReverbPlugin;
 	doap:name "x42 - IR Convolver Stereo";
-	lv2:project <http://gareus.org/oss/lv2/zeroconvolv> ;
+	lv2:project <http://jlearman.org/oss/lv2/zeroconvolv> ;
 	doap:license <http://usefulinc.com/doap/licenses/gpl>;
 	@VERSION@
 	lv2:requiredFeature bufsz:boundedBlockLength, urid:map, opts:options, work:schedule;

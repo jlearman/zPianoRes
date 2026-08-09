@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 Robin Gareus <robin@gareus.org>
+ * Copyright (C) 2026 Jeff Learman <jjlearman@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

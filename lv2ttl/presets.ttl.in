@@ -6,5 +6,5 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-@prefix zcpset: <http://gareus.org/oss/lv2/@LV2NAME@/pset#> .
+@prefix zcpset: <http://jlearman.org/oss/lv2/@LV2NAME@/pset#> .
 
