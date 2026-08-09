@@ -23,9 +23,11 @@ else
   OPTIMIZATIONS ?= -fomit-frame-pointer -O3 -fno-finite-math-only -DNDEBUG
 endif
 
+OPTIMIZATIONS =
+
 ###############################################################################
 CFLAGS ?= $(OPTIMIZATIONS) -Wall
-CXXFLAGS ?= $(OPTIMIZATIONS) -Wall
+override CXXFLAGS += $(OPTIMIZATIONS) -Wall
 
 BUILDDIR=build/
 
@@ -141,6 +143,8 @@ DSP_DEPS = $(DSP_SRC) src/audiosrc.h src/convolver.h src/readable.h src/zeta-con
 
 $(BUILDDIR)$(LV2NAME)$(LIB_EXT): $(DSP_DEPS) Makefile
 	@mkdir -p $(BUILDDIR)
+	@echo CXXFLAGS = $(CXXFLAGS)
+	@echo CPPFLAGS = $(CPPFLAGS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) \
 	  -o $(BUILDDIR)$(LV2NAME)$(LIB_EXT) $(DSP_SRC) \
 	  $(LIBZITACONVOLVER) \
