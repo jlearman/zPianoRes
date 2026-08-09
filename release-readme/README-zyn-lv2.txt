@@ -19,4 +19,4 @@ When you load the plugin, use its controls to load this file as the Impulse Resp
 
 Version history:
 
-v0.0.1 - alpha
+v0.0.2 - alpha
