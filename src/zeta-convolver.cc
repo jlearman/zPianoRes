@@ -103,6 +103,21 @@ Convproc::~Convproc (void)
 }
 
 void
+Convproc::clear ()
+{
+	uint32_t k;
+	for (k = 0; k < _ninp; k++) {
+		memset (_inpbuff[k], 0, _inpsize * sizeof (float));
+	}
+	for (k = 0; k < _nout; k++) {
+		memset (_outbuff[k], 0, _minpart * sizeof (float));
+	}
+	for (k = 0; k < _nlevels; k++) {
+		_convlev[k]->clear ();
+	}
+}
+
+void
 Convproc::set_options (uint32_t options)
 {
 	_options = options;
@@ -602,19 +617,12 @@ Convlevel::impdata_clear (uint32_t inp, uint32_t out)
 }
 
 void
-Convlevel::reset (uint32_t inpsize,
-                  uint32_t outsize,
-                  float**  inpbuff,
-                  float**  outbuff)
+Convlevel::clear (void)
 {
 	uint32_t i;
 	Inpnode* X;
 	Outnode* Y;
 
-	_inpsize = inpsize;
-	_outsize = outsize;
-	_inpbuff = inpbuff;
-	_outbuff = outbuff;
 	for (X = _inp_list; X; X = X->_next) {
 		for (i = 0; i < _npar; i++) {
 			memset (X->_ffta[i], 0, (_parsize + 1) * sizeof (fftwf_complex));
@@ -632,6 +640,23 @@ Convlevel::reset (uint32_t inpsize,
 		_outoffs = _parsize / 2;
 		_inpoffs = _inpsize - _outoffs;
 	}
+	// _bits  = _parsize / _outsize;
+	// _wait  = 0;
+	// _ptind = 0;
+	// _opind = 0;
+}
+
+void
+Convlevel::reset (uint32_t inpsize,
+                  uint32_t outsize,
+                  float**  inpbuff,
+                  float**  outbuff)
+{
+	_inpsize = inpsize;
+	_outsize = outsize;
+	_inpbuff = inpbuff;
+	_outbuff = outbuff;
+	clear ();
 	_bits  = _parsize / _outsize;
 	_wait  = 0;
 	_ptind = 0;

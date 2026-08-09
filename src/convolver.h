@@ -92,6 +92,7 @@ public:
 	           IRSettings      irs = IRSettings ());
 	~Convolver ();
 
+	void clear ();
 	void reconfigure (uint32_t, bool threaded = true);
 
 	void run_buffered_mono (float*, uint32_t);

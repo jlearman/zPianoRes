@@ -476,6 +476,9 @@ run (LV2_Handle instance, uint32_t n_samples)
 			// check for sustain pedal (CC 64)
 			if (controller == 64) {
 				if (value >= 64) {
+					if (sustain_level == 0.0) {
+						self->clv_online->clear ();
+					}
 					sustain_level = 1.0;
 					// TODO: switch to alternate convolver to start with an empty one.
 				} else {

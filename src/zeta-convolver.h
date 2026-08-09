@@ -261,6 +261,8 @@ private:
 	void impdata_clear (uint32_t inp,
 	                    uint32_t out);
 
+	void clear (void);
+
 	void reset (uint32_t inpsize,
 	            uint32_t outsize,
 	            float**  inpbuff,
@@ -399,6 +401,7 @@ public:
 	bool check_stop (void);
 
 	int cleanup (void);
+	void clear (void);
 
 	void print (FILE* F = stdout);
 

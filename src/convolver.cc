@@ -205,6 +205,12 @@ Convolver::~Convolver ()
 }
 
 void
+Convolver::clear (void)
+{
+	_convproc.clear();
+}
+
+void
 Convolver::reconfigure (uint32_t block_size, bool threaded)
 {
 	_convproc.stop_process ();
