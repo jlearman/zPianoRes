@@ -431,7 +431,7 @@ Convolver::output (float* dst, const float* src, uint32_t n) const
 		memcpy (dst, src, n * sizeof (float));
 	} else {
 		const float dry = _dry;
-		const float wet = _wet;
+		const float wet = _wet * static_cast<float>(std::exp2(-8.)); // FIXME: why is convo output so high?
 		for (uint32_t i = 0; i < n; ++i) {
 			dst[i] = dry * dst[i] + wet * src[i];
 		}
