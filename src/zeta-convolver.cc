@@ -633,17 +633,6 @@ Convlevel::clear (void)
 			memset (Y->_buff[i], 0, _parsize * sizeof (float));
 		}
 	}
-	if (_parsize == _outsize) {
-		_outoffs = 0;
-		_inpoffs = 0;
-	} else {
-		_outoffs = _parsize / 2;
-		_inpoffs = _inpsize - _outoffs;
-	}
-	// _bits  = _parsize / _outsize;
-	// _wait  = 0;
-	// _ptind = 0;
-	// _opind = 0;
 }
 
 void
@@ -657,6 +646,13 @@ Convlevel::reset (uint32_t inpsize,
 	_inpbuff = inpbuff;
 	_outbuff = outbuff;
 	clear ();
+	if (_parsize == _outsize) {
+		_outoffs = 0;
+		_inpoffs = 0;
+	} else {
+		_outoffs = _parsize / 2;
+		_inpoffs = _inpsize - _outoffs;
+	}
 	_bits  = _parsize / _outsize;
 	_wait  = 0;
 	_ptind = 0;
