@@ -43,7 +43,7 @@ fi
 
 mkdir -p Artifacts
 rm -f Artifacts/$ZIP
-# zip -r Artifacts/$ZIP ImpulseFiles
+zip -r Artifacts/$ZIP presets/ir/
 
 cd $BUILDDIR
 zip -r $OLDPWD/Artifacts/$ZIP $PLUGNAME.$FORMAT
