@@ -1,6 +1,6 @@
-/* zeroconvolv -- Preset based LV2 convolution plugin
+/* zPianoRes -- piano resonance plugin
  *
- * Copyright (C) 2018-2022 Robin Gareus <robin@gareus.org>
+ * Copyright (C) 2018-2022 Robin Gareus <robin@gareus.org> (zconvo.lv2)
  * Copyright (C) 2026      Learman <jjlearman@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -59,7 +59,7 @@
 #include <lv2/lv2plug.in/ns/lv2core/lv2.h>
 #endif
 
-#define ZC_PREFIX "http://jlearman.org/oss/lv2/zeroconvolv#"
+#define ZC_PREFIX "http://jlearman.org/oss/lv2/zPianoRes#"
 
 /* clang-format off */
 #define ZC_ir        ZC_PREFIX "ir"

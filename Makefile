@@ -31,8 +31,8 @@ override CXXFLAGS += $(OPTIMIZATIONS) -Wall
 
 BUILDDIR=build/
 
-LV2NAME=zeroconvolv
-BUNDLE=zeroconvo.lv2
+LV2NAME=zPianoRes
+BUNDLE=zPianoRes.lv2
 
 targets =
 

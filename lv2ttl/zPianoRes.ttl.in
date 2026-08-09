@@ -23,21 +23,21 @@
 # https://github.com/drobilla/lilv/issues/14
 state:freePath a lv2:Feature .
 
-<http://jlearman.org/rgareus#me>
+<http://github.com/jlearman>
 	a foaf:Person;
-	foaf:name "Robin Gareus";
-	foaf:mbox <mailto:robin@gareus.org>;
-	foaf:homepage <http://gareus.org/>.
+	foaf:name "Jeff Learman";
+	foaf:mbox <mailto:jjlearman@gmail.com>;
+	foaf:homepage <http://github.com/jlearman>.
 
-<http://jlearman.org/oss/lv2/zeroconvolv>
+<http://jlearman.org/oss/lv2/pianores>
 	a doap:Project;
-	doap:maintainer <http://jlearman.org/rgareus#me>;
-	doap:name "x42 - LV2 Convolution".
+	doap:maintainer <http://github.com/jlearman>;
+	doap:name "Piano Resonance Project".
 
 conv:CfgStereo
 	a lv2:Plugin, lv2:ReverbPlugin;
-	doap:name "x42 - IR Convolver Stereo";
-	lv2:project <http://jlearman.org/oss/lv2/zeroconvolv> ;
+	doap:name "zPianoRes";
+	lv2:project <http://jlearman.org/oss/lv2/pianores> ;
 	doap:license <http://usefulinc.com/doap/licenses/gpl>;
 	@VERSION@
 	lv2:requiredFeature bufsz:boundedBlockLength, urid:map, opts:options, work:schedule;
